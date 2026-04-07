@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MediCheck - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="home-container">
+
+    <div class="hero">
+        <h1>💊 Medicine Interaction and Safety Checker System</h1>
+        <p class="subtitle">Check medicine interactions dynamically based on your age and dosage</p>
+    </div>
+
+    <div class="card-container">
+        <div class="card">
+            <i class="fas fa-lock fa-3x"></i>
+            <h2>Login</h2>
+            <p>Access your user/admin dashboard</p>
+            <a href="/login" class="btn">Go to Login</a>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-user-plus fa-3x"></i>
+            <h2>Register</h2>
+            <p>Create a new account</p>
+            <a href="/register" class="btn">Go to Register</a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

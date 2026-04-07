@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard - MediCheck</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Keep the previous background gradient/color */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 100%;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Dashboard content */
+        .dashboard-container {
+            display: flex;
+            margin-left: 220px; /* space for sidebar */
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* Glassy boxes */
+        .input-box, .medicine-table-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            flex: 1;
+        }
+
+        .input-box h3, .medicine-table-box h3 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: white;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.3);
+            text-align: center;
+        }
+
+        th {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Inputs and button */
+        input {
+            width: 90%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            margin: 10px 0;
+        }
+
+        .btn {
+            background: #ff7eb3;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #ff4b2b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>💊 MediCheck</h2>
+        <a href="/user_dashboard" style="margin:20px 0;">🏠 Dashboard</a>
+        <a href="/report">📊 Report</a>
+        <a href="/logout">🚪 Logout</a>
+    </div>
+
+    <div class="dashboard-container">
+        <!-- Left Box: Enter Medicines -->
+        <div class="input-box">
+            <h3>Enter Medicines</h3>
+            <form method="POST">
+                {% for i in range(5) %}
+                    <input list="medicines_list" name="medicines" placeholder="Medicine Name">
+                    <input type="number" name="dosages" placeholder="Dosage (mg)">
+                    <br>
+                {% endfor %}
+                <button class="btn">Check Interaction</button>
+            </form>
+
+            <datalist id="medicines_list">
+                {% for med in medicines %}
+                    <option value="{{ med.name }}">{{ med.name }}</option>
+                {% endfor %}
+            </datalist>
+        </div>
+
+        <!-- Right Box: Medicine Table -->
+        <div class="medicine-table-box">
+            <h3>Available Medicines</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Dosage (mg)</th>
+                        <th>Max Dosage (mg)</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for med in medicines %}
+                        <tr>
+                            <td>{{ med.name }}</td>
+                            <td>{{ med.dosage_mg }}</td>
+                            <td>{{ med.max_dosage_mg }}</td>
+                            <td>{{ med.purpose }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

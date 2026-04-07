@@ -1,0 +1,215 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #1d2671, #c33764, #ff7eb3, #6a11cb);
+    color: white;
+}
+
+.sidebar {
+    width: 230px;
+    position: fixed;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    padding-top: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 5px 0;
+    border-radius: 10px;
+}
+
+.sidebar a:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.main {
+    margin-left: 240px;
+    padding: 20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.15);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+input, select {
+    width: 45%;
+    padding: 10px;
+    margin: 5px 2%;
+    border-radius: 10px;
+    border: none;
+}
+
+.btn {
+    background: #ff7eb3;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: #ff4b2b;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+.low { color: lightgreen; font-weight:bold; }
+.medium { color: orange; font-weight:bold; }
+.high { color: red; font-weight:bold; }
+
+.center-card {
+    max-width: 400px;
+    margin: 80px auto;
+    background: rgba(255,255,255,0.15);
+    padding: 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.link-btn {
+    color: #ffb347;
+    text-decoration: none;
+    font-weight: bold;
+}
+.link-btn:hover { text-decoration: underline; }
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #1d2671, #c33764, #f5af19);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.home-container {
+    text-align: center;
+    width: 90%;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+.subtitle {
+    font-size: 1.2em;
+    margin-bottom: 50px;
+    color: #e0e0e0;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 30px 40px;
+    width: 250px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.card h2 {
+    margin: 20px 0 10px 0;
+}
+
+.card p {
+    font-size: 0.9em;
+    color: #f0f0f0;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    background: #ff7eb3;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #ff4b2b;
+}
+
+.fas {
+    color: #ffe600;
+    margin-bottom: 15px;
+}
+/* ----------------- ADMIN SIDEBAR FIX ----------------- */
+.sidebar {
+    width: 230px;
+    position: fixed;
+    top: 0;           /* Ensure it starts from the very top */
+    left: 0;          /* Fix at the left edge */
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    padding-top: 60px; /* increase top padding so heading does not hide behind first card */
+    z-index: 1000;    /* keep sidebar above other content */
+}
+
+.sidebar h2 {
+    position: absolute; /* position heading relative to sidebar */
+    top: 10px;          /* distance from top */
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 10px 0;
+    font-size: 1.8em;
+    z-index: 1001;      /* make sure heading is above cards */
+}
+
+.main {
+    margin-left: 240px; /* space for fixed sidebar */
+    padding: 20px;
+}
+
+

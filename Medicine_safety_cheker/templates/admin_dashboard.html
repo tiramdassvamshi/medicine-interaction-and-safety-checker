@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard - MediCheck</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar" style="width:20%; float:left; background:#2c3e50; min-height:100vh; color:white; padding:20px;">
+        <h2 style="text-align:center;">💊 MediCheck Admin</h2>
+        <a href="/admin_dashboard" style="color:white; display:block; margin:20px 0;">🏠 Dashboard</a>
+        <a href="/logout" style="color:white; display:block; margin:10px 0;">🚪 Logout</a>
+    </div>
+
+    <!-- Main content -->
+    <div class="main" style="width:75%; float:right; padding:20px;">
+
+        <!-- Add / Update Medicines -->
+        <div class="card" style="width:100%; padding:20px; margin-bottom:20px;">
+            <h2 style="text-align:center;">Add / Update Medicines</h2>
+            <form method="POST">
+                <input type="text" name="name" placeholder="Medicine Name" required>
+                <input type="number" step="any" name="dosage_mg" placeholder="Dosage (mg)" required>
+                <input type="number" step="any" name="max_dosage_mg" placeholder="Max Dosage (mg)" required>
+                <input type="text" name="purpose" placeholder="Purpose" required>
+                <button type="submit" class="btn">Add / Update</button>
+            </form>
+        </div>
+
+        <!-- Available Medicines Table -->
+        <div class="card" style="width:100%; padding:20px;">
+            <h2 style="text-align:center;">Available Medicines</h2>
+            <table style="width:100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>Medicine Name</th>
+                        <th>Dosage (mg)</th>
+                        <th>Max Dosage (mg)</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for med in medicines %}
+                    <tr>
+                        <td>{{ med.name }}</td>
+                        <td>{{ med.dosage_mg }}</td>
+                        <td>{{ med.max_dosage_mg }}</td>
+                        <td>{{ med.purpose }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

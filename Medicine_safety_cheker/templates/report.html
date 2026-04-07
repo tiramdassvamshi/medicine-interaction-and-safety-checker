@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interaction Report</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f9;
+        }
+
+        /* ✅ SIDEBAR */
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            position: fixed;
+            background: #2c3e50;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            background: #34495e;
+        }
+
+        /* ✅ MAIN */
+        .main {
+            margin-left: 210px;
+            padding: 20px;
+        }
+
+        /* ✅ CENTER TITLE */
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        /* ✅ BIG CARDS */
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            min-height: 300px;
+        }
+
+        /* ✅ TABLE */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        /* ✅ RISK COLORS */
+        .low { background: #d4edda; }
+        .medium { background: #fff3cd; }
+        .high { background: #f8d7da; }
+
+        canvas {
+            width: 100% !important;
+            height: 250px !important;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- ✅ SIDEBAR -->
+<div class="sidebar">
+    <a href="/user_dashboard">Dashboard</a>
+    <a href="/report">Report</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<div class="main">
+
+    <!-- ✅ CENTERED TITLE -->
+    <h1>Medicine Interaction Report</h1>
+    <h2>Overall Risk: {{ overall }}</h2>
+
+    <div class="cards">
+
+        <!-- ✅ CARD 1 TABLE -->
+        <div class="card">
+            <h3>Entered Medicines</h3>
+
+            <table>
+                <tr>
+    <th>Name</th>
+    <th>Dosage</th>
+    <th>Max</th>
+    <th>Purpose</th>
+    <th>Risk</th>
+</tr>
+
+{% for m in data %}
+<tr class="{{ m.risk|lower }}">
+    <td>{{ m.name }}</td>
+    <td>{{ m.dosage_mg }}</td>
+    <td>{{ m.max_dosage_mg }}</td>
+    <td>{{ m.purpose }}</td>
+    <td>{{ m.risk }}</td>
+</tr>
+{% endfor %}
+
+            </table>
+        </div>
+
+        <!-- ✅ CARD 2 CHART -->
+        <div class="card" style="position: relative; height: 250px;">
+            <h3>Risk Chart</h3>
+            <canvas id="chart"></canvas>
+        </div>
+
+        <!-- ✅ CARD 3 ANALYSIS -->
+        <div class="card">
+            <h3>Analysis</h3>
+            <p>{{ analysis }}</p>
+        </div>
+        
+
+        <!-- ✅ CARD 4 CONCLUSION -->
+        <div class="card">
+            <h3>Conclusion</h3>
+            <p>{{ conclusion }}</p>
+        </div>
+
+    </div>
+<!-- ✅ Chart.js Library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('chart').getContext('2d');
+
+    const labels = [
+        {% for m in data %}
+            "{{ m.name }}"{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ];
+
+    const values = [
+        {% for m in data %}
+            {{ m.taken }}{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ];
+
+    const colors = [
+        {% for m in data %}
+            "{% if m.risk == 'Low' %}lightgreen{% elif m.risk == 'Medium' %}orange{% else %}red{% endif %}"{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ];
+
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: colors
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+</script>
+</body>
+</html>
